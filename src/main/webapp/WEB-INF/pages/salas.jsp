@@ -75,6 +75,7 @@
                 </table>
             </section>
             </c:if>
+            <%--
             <c:if test="${tela == 'encontrar'}">
             <section class="content-card">
                 <h2>Encontrar Sala Disponível</h2>
@@ -127,6 +128,7 @@
                 </table>
             </section>
             </c:if>
+            --%>
         </main>
     </div>
 </div>

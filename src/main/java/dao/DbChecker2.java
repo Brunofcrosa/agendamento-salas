@@ -29,7 +29,6 @@ public class DbChecker2 {
                 System.out.println("No reservations found matching the JOIN query.");
             }
             
-            // Let's also check raw table rows in case of orphan rows (missing join)
             try (ResultSet rsRaw = stmt.executeQuery("SELECT * FROM reserva")) {
                 System.out.println("Raw reservations in DB:");
                 int rawCount = 0;

@@ -82,8 +82,6 @@ public class SalaServlet extends HttpServlet {
 
         List<Sala> lista = service.listar();
 
-        // Se estivermos na busca de salas e os parâmetros de horário forem preenchidos,
-        // filtra as salas para exibir apenas aquelas que estão efetivamente disponíveis.
         if ("encontrar".equals(tela)) {
             String diaSemana = req.getParameter("diaSemana");
             String horaInicioParam = req.getParameter("horaInicio");

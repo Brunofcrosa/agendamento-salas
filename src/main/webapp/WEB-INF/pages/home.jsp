@@ -17,6 +17,7 @@
         <jsp:include page="/WEB-INF/pages/includes/sidebar.jsp" />
         <main class="main-content">
             <section class="home-section">
+                <!-- 
                 <h2 class="section-title">Ferramentas</h2>
                 <div class="tool-card-row">
                     <a class="tool-card" href="sala?tela=encontrar">
@@ -28,6 +29,7 @@
                         <b><i class="fa-solid fa-arrow-right"></i></b>
                     </a>
                 </div>
+                -->
 
                 <h2 class="section-title">Gerenciador</h2>
                 <div class="tool-card-row">

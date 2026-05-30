@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 
@@ -39,6 +39,7 @@
         </a>
       </li>
 
+      <%--
       <li class="menu-section">
         <h4 class="menu-section-text">Ferramentas</h4>
       </li>
@@ -48,6 +49,7 @@
           <span class="menu-link-text">Encontrar Salas</span>
         </a>
       </li>
+      --%>
     </ul>
   </nav>
 </aside>
