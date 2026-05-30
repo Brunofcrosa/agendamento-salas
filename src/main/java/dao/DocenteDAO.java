@@ -11,25 +11,19 @@ public class DocenteDAO {
     private Docente map(ResultSet rs) throws SQLException {
         Docente docente = new Docente();
         docente.setId(rs.getInt("id"));
+        docente.setMatricula(rs.getString("matricula"));
         docente.setNome(rs.getString("nome"));
-        docente.setEmail(rs.getString("email"));
-        docente.setTelefone(rs.getString("telefone"));
-        docente.setDepartamento(rs.getString("departamento"));
-        docente.setAtivo(rs.getBoolean("ativo"));
         return docente;
     }
 
     public boolean inserir(Docente docente) {
-        String sql = "INSERT INTO docente (nome, email, telefone, departamento, ativo) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO docente (matricula, nome) VALUES (?, ?)";
 
         try (Connection conn = ConexaoDB.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, docente.getNome());
-            stmt.setString(2, docente.getEmail());
-            stmt.setString(3, docente.getTelefone());
-            stmt.setString(4, docente.getDepartamento());
-            stmt.setBoolean(5, docente.isAtivo());
+            stmt.setString(1, docente.getMatricula());
+            stmt.setString(2, docente.getNome());
 
             return stmt.executeUpdate() > 0;
 
@@ -58,22 +52,8 @@ public class DocenteDAO {
     }
 
     public List<Docente> listarAtivos() {
-        String sql = "SELECT * FROM docente WHERE ativo = true ORDER BY nome";
-        List<Docente> lista = new ArrayList<>();
-
-        try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                lista.add(map(rs));
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao listar docentes ativos", e);
-        }
-
-        return lista;
+        // Como o campo 'ativo' foi removido, todos os docentes cadastrados estão disponíveis
+        return listar();
     }
 
     public Docente buscarPorId(int id) {
@@ -97,17 +77,14 @@ public class DocenteDAO {
     }
 
     public void atualizar(Docente docente) {
-        String sql = "UPDATE docente SET nome=?, email=?, telefone=?, departamento=?, ativo=? WHERE id=?";
+        String sql = "UPDATE docente SET matricula=?, nome=? WHERE id=?";
 
         try (Connection conn = ConexaoDB.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, docente.getNome());
-            stmt.setString(2, docente.getEmail());
-            stmt.setString(3, docente.getTelefone());
-            stmt.setString(4, docente.getDepartamento());
-            stmt.setBoolean(5, docente.isAtivo());
-            stmt.setInt(6, docente.getId());
+            stmt.setString(1, docente.getMatricula());
+            stmt.setString(2, docente.getNome());
+            stmt.setInt(3, docente.getId());
 
             stmt.executeUpdate();
 

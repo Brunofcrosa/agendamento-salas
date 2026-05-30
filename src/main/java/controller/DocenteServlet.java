@@ -64,16 +64,13 @@ public class DocenteServlet extends HttpServlet {
         }
 
         String idParam = req.getParameter("id");
+        String matricula = req.getParameter("matricula");
         String nome = req.getParameter("nome");
-        String email = req.getParameter("email");
-        String telefone = req.getParameter("telefone");
-        String departamento = req.getParameter("departamento");
-        boolean ativo = "on".equals(req.getParameter("ativo"));
 
-        Docente docente = new Docente(nome, email, telefone, departamento, ativo);
+        Docente docente = new Docente(matricula, nome);
 
         try {
-            if (idParam != null && !idParam.isEmpty()) {
+            if (idParam != null && !idParam.isEmpty() && !"0".equals(idParam)) {
                 docente.setId(Integer.parseInt(idParam));
                 service.atualizar(docente);
                 resp.sendRedirect("docente?tela=listar&msg=editado");

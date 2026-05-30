@@ -20,7 +20,7 @@
       <li class="menu-section">
         <h4 class="menu-section-text">Gerenciamento</h4>
       </li>
-      <li class="menu-item ${pageName == 'salas' ? 'menu-item-active' : ''}">
+      <li class="menu-item ${pageName == 'salas' && tela != 'encontrar' ? 'menu-item-active' : ''}">
         <a class="menu-link" href="sala">
           <i class="menu-link-icon fa-solid fa-door-open"></i>
           <span class="menu-link-text">Salas</span>
@@ -51,4 +51,3 @@
     </ul>
   </nav>
 </aside>
-

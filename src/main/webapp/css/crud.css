@@ -140,10 +140,7 @@ select {
 }
 
 select {
-    background: #f4f8ff;
-    border-color: #c9d7ee;
-    color: #003366;
-    font-weight: 500;
+    color: #3f4254;
 }
 
 input:focus,
@@ -267,11 +264,29 @@ td a:hover {
     background: #f4f8ff;
     text-decoration: none;
 }
-
 .actions {
     white-space: nowrap;
 }
 
+.btn-icon {
+    font-size: 18px;
+    color: #003366; /* navy blue */
+    margin-right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+
+.btn-icon:hover {
+    color: #3699ff; /* bright blue */
+    text-decoration: none !important;
+}
+
+.btn-delete:hover {
+    color: #f64e60; /* soft red */
+}
 @media (max-width: 950px) {
     .app-shell {
         margin-left: 0;

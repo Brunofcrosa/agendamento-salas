@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <html>
@@ -19,7 +19,7 @@
             <section class="home-section">
                 <h2 class="section-title">Ferramentas</h2>
                 <div class="tool-card-row">
-                    <a class="tool-card" href="reserva?tela=novo">
+                    <a class="tool-card" href="sala?tela=encontrar">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <span>
                             <strong>Buscar sala ideal</strong>

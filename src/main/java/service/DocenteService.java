@@ -46,11 +46,8 @@ public class DocenteService {
         if (docente.getNome() == null || docente.getNome().trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do docente é obrigatório");
         }
-        if (docente.getEmail() == null || docente.getEmail().trim().isEmpty()) {
-            throw new IllegalArgumentException("E-mail do docente é obrigatório");
-        }
-        if (docente.getDepartamento() == null || docente.getDepartamento().trim().isEmpty()) {
-            throw new IllegalArgumentException("Departamento do docente é obrigatório");
+        if (docente.getMatricula() == null || docente.getMatricula().trim().isEmpty()) {
+            throw new IllegalArgumentException("Matrícula do docente é obrigatória");
         }
     }
 }

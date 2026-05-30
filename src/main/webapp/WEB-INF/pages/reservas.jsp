@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <html>
@@ -17,14 +17,15 @@
         <jsp:include page="/WEB-INF/pages/includes/sidebar.jsp" />
         <main class="main-content">
             <c:if test="${not empty erro}"><div class="msg erro">${erro}</div></c:if>
-            <c:choose>
-                <c:when test="${param.msg == 'salva'}"><div class="msg">Reserva cadastrada!</div></c:when>
-                <c:when test="${param.msg == 'editada'}"><div class="msg">Reserva atualizada!</div></c:when>
-                <c:when test="${param.msg == 'cancelada'}"><div class="msg">Reserva cancelada!</div></c:when>
-            </c:choose>
+             <c:choose>
+                 <c:when test="${param.msg == 'salva'}"><div class="msg">Reserva cadastrada!</div></c:when>
+                 <c:when test="${param.msg == 'editada'}"><div class="msg">Reserva atualizada!</div></c:when>
+                 <c:when test="${param.msg == 'cancelada'}"><div class="msg">Reserva cancelada!</div></c:when>
+                 <c:when test="${param.msg == 'sucesso'}"><div class="msg">Agendado com sucesso!</div></c:when>
+             </c:choose>
             <c:if test="${tela == 'novo'}">
             <section class="content-card">
-                <h2>Novo Agendamento</h2>
+                <h2>${reserva.id > 0 ? 'Editar Agendamento' : 'Novo Agendamento'}</h2>
                 <form action="reserva" method="post" class="form-grid">
                     <input type="hidden" name="id" value="${reserva.id}">
                     <div class="form-field">
@@ -62,7 +63,7 @@
                         <input type="time" name="horaFim" value="${reserva.horaFim}" required>
                     </div>
                     <div class="form-actions">
-                        <button type="submit">${reserva.id != null ? 'Atualizar' : 'Salvar'}</button>
+                        <button type="submit">Salvar Agendamento</button>
                     </div>
                 </form>
             </section>
@@ -75,17 +76,24 @@
                 </div>
                 <table>
                     <tr><th>ID</th><th>Sala</th><th>Professor</th><th>Disciplina</th><th>Data</th><th>Início</th><th>Fim</th><th>Ações</th></tr>
-                    <c:forEach var="r" items="${reservas}" varStatus="status">
-                        <tr>
-                            <td>${status.index + 1}</td>
-                            <td>${r.salaNome}</td>
-                            <td>${r.docenteNome}</td>
-                            <td>${r.finalidade}</td>
-                            <td>${r.dataReserva}</td>
-                            <td>${r.horaInicio}</td>
-                            <td>${r.horaFim}</td>
-                            <td class="actions"><a href="reserva?acao=editar&id=${r.id}">Editar</a><a href="reserva?acao=cancelar&id=${r.id}" onclick="return confirm('Cancelar reserva?')">Excluir</a></td>
-                        </tr>
+                    <c:set var="counter" value="1" />
+                    <c:forEach var="r" items="${reservas}">
+                        <c:if test="${r.status == 'ATIVA'}">
+                            <tr>
+                                <td>${counter}</td>
+                                <td>${r.salaNome}</td>
+                                <td>${r.docenteNome}</td>
+                                <td>${r.finalidade}</td>
+                                <td>${r.dataReserva}</td>
+                                <td>${r.horaInicio}</td>
+                                <td>${r.horaFim}</td>
+                                <td class="actions">
+                                    <a href="reserva?acao=editar&id=${r.id}" title="Editar" class="btn-icon btn-edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="reserva?acao=cancelar&id=${r.id}" title="Excluir" class="btn-icon btn-delete" onclick="return confirm('Cancelar reserva?')"><i class="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                            <c:set var="counter" value="${counter + 1}" />
+                        </c:if>
                     </c:forEach>
                 </table>
             </section>

@@ -8,11 +8,8 @@ CREATE TABLE usuario (
 
 CREATE TABLE docente (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(120) NOT NULL,
-    email VARCHAR(160) NOT NULL UNIQUE,
-    telefone VARCHAR(30),
-    departamento VARCHAR(120) NOT NULL,
-    ativo BOOLEAN NOT NULL DEFAULT TRUE
+    matricula VARCHAR(60) NOT NULL UNIQUE,
+    nome VARCHAR(120) NOT NULL
 );
 
 CREATE TABLE sala (

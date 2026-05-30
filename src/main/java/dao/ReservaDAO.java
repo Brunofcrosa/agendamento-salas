@@ -45,7 +45,7 @@ public class ReservaDAO {
     }
 
     public List<Reserva> listar() {
-        String sql = "SELECT r.*, s.nome AS sala_nome, d.nome AS docente_nome FROM reserva r INNER JOIN sala s ON s.id = r.sala_id INNER JOIN docente d ON d.id = r.docente_id ORDER BY r.data_reserva, r.hora_inicio";
+        String sql = "SELECT r.*, s.nome AS sala_nome, d.nome AS docente_nome FROM reserva r INNER JOIN sala s ON s.id = r.sala_id INNER JOIN docente d ON d.id = r.docente_id WHERE r.status = 'ATIVA' ORDER BY r.data_reserva, r.hora_inicio";
         List<Reserva> lista = new ArrayList<>();
 
         try (Connection conn = ConexaoDB.getConexao();

@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <html>
@@ -21,10 +21,11 @@
                 <c:when test="${param.msg == 'salvo'}"><div class="msg">Sala cadastrada!</div></c:when>
                 <c:when test="${param.msg == 'excluido'}"><div class="msg">Sala excluída!</div></c:when>
                 <c:when test="${param.msg == 'editado'}"><div class="msg">Sala atualizada!</div></c:when>
+                <c:when test="${param.msg == 'sucesso'}"><div class="msg">Agendado com sucesso!</div></c:when>
             </c:choose>
             <c:if test="${tela == 'novo'}">
             <section class="content-card">
-                <h2>Nova Sala</h2>
+                <h2>${sala.id > 0 ? 'Editar Sala' : 'Nova Sala'}</h2>
                 <form action="sala" method="post" class="form-grid">
                     <input type="hidden" name="id" value="${sala.id}">
                     <div class="form-field">
@@ -45,7 +46,7 @@
                     </div>
                     <input type="hidden" name="bloco" value="Principal">
                     <div class="form-actions">
-                        <button type="submit">${sala.id != null ? 'Atualizar Sala' : 'Salvar Sala'}</button>
+                        <button type="submit">Salvar Sala</button>
                     </div>
                 </form>
             </section>
@@ -65,7 +66,10 @@
                             <td>${s.capacidade}</td>
                             <td>${s.recursos == 'Projetor' ? 'Sim' : 'Não'}</td>
                             <td>${s.ativa ? 'Ativa' : 'Manutenção'}</td>
-                            <td class="actions"><a href="sala?acao=editar&id=${s.id}">Editar</a><a href="sala?acao=excluir&id=${s.id}" onclick="return confirm('Excluir sala?')">Excluir</a></td>
+                            <td class="actions">
+                                <a href="sala?acao=editar&id=${s.id}" title="Editar" class="btn-icon btn-edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="sala?acao=excluir&id=${s.id}" title="Excluir" class="btn-icon btn-delete" onclick="return confirm('Excluir sala?')"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -116,7 +120,7 @@
                                 <td>${s.capacidade}</td>
                                 <td>${s.recursos == 'Projetor' ? 'Sim' : 'Não'}</td>
                                 <td>Ativa</td>
-                                <td class="actions"><a class="table-button" href="reserva?tela=novo&salaId=${s.id}&horaInicio=${param.horaInicio}&horaFim=${param.horaFim}">Reservar</a></td>
+                                <td class="actions"><a class="table-button" href="sala?acao=reservarRapido&salaId=${s.id}&diaSemana=${param.diaSemana}&horaInicio=${param.horaInicio}&horaFim=${param.horaFim}&capacidade=${param.capacidade}&possuiProjetor=${param.possuiProjetor}">Reservar</a></td>
                             </tr>
                         </c:if>
                     </c:forEach>

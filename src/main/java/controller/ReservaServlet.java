@@ -86,7 +86,7 @@ public class ReservaServlet extends HttpServlet {
             String status = "ATIVA";
             Reserva reserva = new Reserva(salaId, docenteId, dataReserva, horaInicio, horaFim, finalidade, status);
 
-            if (idParam != null && !idParam.isEmpty()) {
+            if (idParam != null && !idParam.isEmpty() && !"0".equals(idParam)) {
                 reserva.setId(Integer.parseInt(idParam));
                 service.atualizar(reserva);
                 resp.sendRedirect("reserva?tela=listar&msg=editada");
